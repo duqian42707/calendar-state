@@ -1,0 +1,37 @@
+.calendar {
+    margin: 20px auto;
+}
+
+.calendar .react-calendar__tile--active {
+
+    background: rgb(0, 110, 220, 0.25);
+}
+
+.calendar .react-calendar__tile--active:enabled:hover,
+.calendar .react-calendar__tile--active:enabled:focus {
+    background: rgb(16, 135, 255, 0.25);
+}
+
+/*正常*/
+.calendar .square_1 {
+    color: green;
+}
+
+/*请假*/
+.calendar .square_2 {
+    color: #d10000;
+}
+
+/*休息*/
+.calendar .square_3 {
+    color: blue;
+}
+/*未知*/
+.calendar .square_9 {
+    color: #ffa000;
+}
+
+.logs {
+    width: 350px;
+    margin: 0 auto;
+}
