@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-用`React`写的一个日历，可以记录每日的状态，数据保存至`PostgreSQL`数据库
+用`React`写的一个日历，可以记录每日的状态，数据保存至`PostgreSQL`数据库，[查看示例](https://duqian42707.github.io/calendar-state/)。
 
 ![](./img/1.png)
 
