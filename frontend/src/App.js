@@ -8,10 +8,10 @@ import axios from "axios";
 
 const local_key = '_dq_calendar_data_';
 const actions = [
-  {text: '正常', key: '1'},
-  {text: '请假', key: '2'},
-  {text: '休息', key: '3'},
-  {text: '未知', key: '9'},
+  {text: '正常', key: '1', color: 'green'},
+  {text: '请假', key: '2', color: '#d10000'},
+  {text: '休息', key: '3', color: 'blue'},
+  {text: '未知', key: '9', color: '#ffa000'},
 ]
 
 function App() {
@@ -34,8 +34,10 @@ function App() {
 
   const onClickDay = (date) => {
     setSelectedDate(date);
-    setActionSheetVisible(true);
-
+    // 点击另一个月份时不弹出选择框，同月份时点击再弹出
+    if (moment(selectedDate).format('YYYY-MM') === moment(date).format('YYYY-MM')) {
+      setActionSheetVisible(true);
+    }
   }
   const onAction = (action) => {
     const ymd = moment(selectedDate).format('YYYY-MM-DD');
@@ -84,14 +86,16 @@ function App() {
       const type = data[ymd] || '未知';
       let line = lines.find(x => x.name === type);
       if (line == null) {
-        line = {name: type, value: 0}
+        const action = actions.find(x => x.text === type);
+        line = {name: type, color: action.color, key: action.key, value: 0}
         lines.push(line);
       }
       line.value += 1;
     }
+    lines.sort((a, b) => Number(a.key) - Number(b.key));
     const total = lines.map(x => x.value).reduce((a, b) => a + b, 0);
-    lines.push({name: '共计', value: total});
-    return <>{lines.map(line => <div key={line.name}>{line.name}: {line.value}天</div>)}</>
+    lines.push({name: '共计', color: '#333', value: total});
+    return <>{lines.map(line => <div key={line.name} style={{color: line.color}}>{line.name}: {line.value}天</div>)}</>
   }
 
   useEffect(() => {
